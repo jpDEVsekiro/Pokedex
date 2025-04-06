@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/app/core/application/theme/palettes.dart';
 import 'package:pokedex/app/modules/widgets/text_pokemon.dart';
 
@@ -7,12 +8,22 @@ class CharacteristicBox extends StatelessWidget {
       {super.key,
       required this.boxTitle,
       required this.boxValue,
-      required this.boxIcon,
-      this.boxWidth = 150});
+      required IconData this.boxIcon,
+      this.boxWidth = 150})
+      : boxSvgIcon = null;
+
+  const CharacteristicBox.svg(
+      {super.key,
+      required this.boxTitle,
+      required String this.boxSvgIcon,
+      required this.boxValue,
+      this.boxWidth = 150})
+      : boxIcon = null;
   final String boxTitle;
   final String boxValue;
-  final IconData boxIcon;
+  final IconData? boxIcon;
   final double boxWidth;
+  final String? boxSvgIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +34,20 @@ class CharacteristicBox extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                boxIcon,
-                size: 16,
-                color: Palettes.grayTextColor,
-              ),
+              if (boxSvgIcon != null)
+                SvgPicture.asset(
+                  boxSvgIcon!,
+                  colorFilter:
+                      ColorFilter.mode(Palettes.grayTextColor, BlendMode.srcIn),
+                  height: 16,
+                  width: 16,
+                )
+              else
+                Icon(
+                  boxIcon,
+                  size: 16,
+                  color: Palettes.grayTextColor,
+                ),
               const SizedBox(width: 4),
               TextPokemon(
                 text: boxTitle,

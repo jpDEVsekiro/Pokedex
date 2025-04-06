@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:pokedex/app/core/application/enums/pokemon_type_enum.dart';
 import 'package:pokedex/app/core/application/theme/palettes.dart';
 import 'package:pokedex/app/modules/pokemon_details/pokemon_details_page/pokemon_details_page_controller.dart';
 import 'package:pokedex/app/modules/pokemon_details/widgets/characteristic_box.dart';
 import 'package:pokedex/app/modules/widgets/text_pokemon.dart';
+import 'package:pokedex/app/modules/widgets/type_badge.dart';
 
 class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
   const PokemonDetailsPage({super.key});
@@ -12,6 +14,7 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Palettes.backgroundColor,
       body: SingleChildScrollView(
         child: Obx(() {
           return Column(
@@ -54,11 +57,7 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                                   end: Alignment.bottomRight,
                                   colors: [
                                     Colors.white,
-                                    controller.pokemonModel.value?.types.first
-                                            .color
-                                            .withValues(alpha: 0.0) ??
-                                        Colors.transparent,
-                                    //                                    Colors.white.withValues(alpha: 0.05),
+                                    Colors.white.withValues(alpha: 0.05),
                                   ]).createShader(bounds);
                             },
                             blendMode: BlendMode.srcIn,
@@ -122,17 +121,37 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                 ),
               ),
               SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                height: 40,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.pokemonModel.value?.types.length ?? 0,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: TypeBadge(
+                        type: controller.pokemonModel.value?.types[index] ??
+                            PokemonTypeEnum.unknown,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
-                    child: CharacteristicBox(
+                    child: CharacteristicBox.svg(
                       boxTitle: 'Peso',
                       boxValue:
                           controller.pokemonModel.value?.weightFormatted ?? '',
-                      boxIcon: Icons.monitor_weight_outlined,
+                      boxSvgIcon: 'assets/icons/weight_icon.svg',
                       boxWidth: Get.width / 2 - 15 - 7.5,
                     ),
                   ),
@@ -155,23 +174,23 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
-                    child: CharacteristicBox(
-                      boxTitle: 'XP Base',
-                      boxValue: controller.pokemonModel.value?.baseExperience
-                              .toString() ??
+                    child: CharacteristicBox.svg(
+                      boxTitle: 'Habilidade',
+                      boxValue: controller
+                              .pokemonModel.value?.abilities.firstOrNull ??
                           '',
-                      boxIcon: Icons.abc,
+                      boxSvgIcon: 'assets/icons/poke_ball_icon.svg',
                       boxWidth: Get.width / 2 - 15 - 7.5,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
-                    child: CharacteristicBox(
+                    child: CharacteristicBox.svg(
                       boxTitle: 'Habilidade',
-                      boxValue: controller
-                              .pokemonModel.value?.abilities.firstOrNull ??
-                          '',
-                      boxIcon: Icons.height_rounded,
+                      boxValue:
+                          controller.pokemonModel.value?.abilities.lastOrNull ??
+                              '',
+                      boxSvgIcon: 'assets/icons/poke_ball_icon.svg',
                       boxWidth: Get.width / 2 - 15 - 7.5,
                     ),
                   ),
