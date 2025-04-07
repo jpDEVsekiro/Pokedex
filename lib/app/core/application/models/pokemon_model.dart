@@ -1,4 +1,5 @@
 import 'package:pokedex/app/core/application/enums/pokemon_type_enum.dart';
+import 'package:pokedex/app/core/application/models/pokemon_flavor_text_model.dart';
 import 'package:pokedex/app/core/application/models/pokemon_preview_model.dart';
 
 class PokemonModel {
@@ -10,8 +11,10 @@ class PokemonModel {
   final List<PokemonTypeEnum> types;
   final PokemonPreviewModel pokemonPreviewModel;
   final List<String> abilities;
+  PokemonFlavorTextModel? flavorTextModel;
 
   PokemonModel({
+    this.flavorTextModel,
     required this.baseExperience,
     required this.abilities,
     required this.weight,

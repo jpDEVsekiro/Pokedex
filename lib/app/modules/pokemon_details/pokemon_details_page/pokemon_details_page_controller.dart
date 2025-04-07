@@ -19,6 +19,8 @@ class PokemonDetailsPageController extends GetxController {
   init() async {
     pokemonModel.value =
         await _pokemonDetailsUseCase.getPokemon(pokemonPreviewModel.id);
+    final flavorTextModel =
+        await _pokemonDetailsUseCase.getFlavorText(pokemonPreviewModel.id);
     if (pokemonModel.value == null) {
       Get.snackbar(
         'Error',
@@ -28,6 +30,7 @@ class PokemonDetailsPageController extends GetxController {
         colorText: Colors.white,
       );
     } else {
+      pokemonModel.value!.flavorTextModel = flavorTextModel;
       pokemonModel.refresh();
     }
   }
