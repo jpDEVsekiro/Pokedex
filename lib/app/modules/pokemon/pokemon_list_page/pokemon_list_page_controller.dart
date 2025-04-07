@@ -11,11 +11,14 @@ class PokemonListPageController extends GetxController {
   RxList<PokemonPreviewModel> filterPokemonList = <PokemonPreviewModel>[].obs;
   Rx<PokemonTypeEnum> selectedType = PokemonTypeEnum.allTypes.obs;
   TextEditingController searchController = TextEditingController();
+  List<String> pokemonAbilities = <String>[];
+  RxString selectedAbility = 'Habilidades'.obs;
 
   @override
   onInit() {
     super.onInit();
     getPokemonList();
+    getPokemonAbilities();
   }
 
   void getPokemonList() async {
@@ -23,6 +26,9 @@ class PokemonListPageController extends GetxController {
     if (selectedType.value != PokemonTypeEnum.allTypes) {
       pokemonList =
           await pokemonListUseCase.getPokemonListByType(selectedType.value);
+    } else if (selectedAbility.value != 'Habilidades') {
+      pokemonList = await pokemonListUseCase
+          .getPokemonListByAbility(selectedAbility.value);
     } else {
       pokemonList = await pokemonListUseCase.getPokemonList();
     }
@@ -42,7 +48,20 @@ class PokemonListPageController extends GetxController {
   }
 
   void onSelectType(PokemonTypeEnum type) {
+    selectedAbility.value = 'Habilidades';
     selectedType.value = type;
     getPokemonList();
+  }
+
+  void onSelectAbility(String ability) {
+    selectedType.value = PokemonTypeEnum.allTypes;
+    selectedAbility.value = ability;
+    getPokemonList();
+  }
+
+  void getPokemonAbilities() async {
+    pokemonAbilities = await pokemonListUseCase.getPokemonAbilities();
+    pokemonAbilities.insert(0, 'Habilidades');
+    selectedAbility.value = pokemonAbilities[0];
   }
 }

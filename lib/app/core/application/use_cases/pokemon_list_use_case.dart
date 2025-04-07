@@ -33,4 +33,26 @@ class PokemonListUseCase implements IPokemonListUseCase {
     }
     return pokemonList;
   }
+
+  @override
+  Future<List<PokemonPreviewModel>> getPokemonListByAbility(
+      String ability) async {
+    HttpResponse httpResponse =
+        await _httpClientAdapter.get('${Endpoints.ability}/$ability');
+    List<PokemonPreviewModel> pokemonList = [];
+    for (var pokemon in httpResponse.data['pokemon']) {
+      pokemonList.add(PokemonPreviewModel.fromJson(pokemon['pokemon']));
+    }
+    return pokemonList;
+  }
+
+  @override
+  Future<List<String>> getPokemonAbilities() async {
+    HttpResponse httpResponse = await _httpClientAdapter.get(Endpoints.ability);
+    List<String> abilityList = [];
+    for (var ability in httpResponse.data['results']) {
+      abilityList.add(ability['name']);
+    }
+    return abilityList;
+  }
 }

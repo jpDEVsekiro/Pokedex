@@ -19,6 +19,9 @@ class PokemonListPage extends GetView<PokemonListPageController> {
                 onSelectType: controller.onSelectType,
                 selectedType: controller.selectedType.value,
                 searchController: controller.searchController,
+                selectedAbility: controller.selectedAbility.value,
+                abilityList: controller.pokemonAbilities,
+                onSelectAbility: controller.onSelectAbility,
               )),
           Obx(
             () => SliverPadding(

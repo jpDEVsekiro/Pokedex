@@ -4,4 +4,6 @@ import 'package:pokedex/app/core/application/models/pokemon_preview_model.dart';
 abstract class IPokemonListUseCase {
   Future<List<PokemonPreviewModel>> getPokemonList();
   Future<List<PokemonPreviewModel>> getPokemonListByType(PokemonTypeEnum type);
+  Future<List<String>> getPokemonAbilities();
+  Future<List<PokemonPreviewModel>> getPokemonListByAbility(String ability);
 }

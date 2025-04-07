@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pokedex/app/core/application/enums/pokemon_type_enum.dart';
 import 'package:pokedex/app/core/application/theme/palettes.dart';
 import 'package:pokedex/app/core/application/theme/pokemon_text_style.dart';
+import 'package:pokedex/app/modules/pokemon/widgets/ability_badge.dart';
 import 'package:pokedex/app/modules/pokemon/widgets/bottom_sheet_body.dart';
 import 'package:pokedex/app/modules/widgets/type_badge.dart';
 
@@ -13,12 +14,18 @@ class PokemonListAppBar extends StatelessWidget {
       this.onChanged,
       this.onSelectType,
       required this.searchController,
-      required this.selectedType});
+      required this.selectedType,
+      required this.selectedAbility,
+      required this.abilityList,
+      this.onSelectAbility});
 
   final void Function(String)? onChanged;
   final void Function(PokemonTypeEnum)? onSelectType;
+  final void Function(String)? onSelectAbility;
   final TextEditingController searchController;
   final PokemonTypeEnum selectedType;
+  final String selectedAbility;
+  final List<String> abilityList;
 
   @override
   Widget build(BuildContext context) {
@@ -137,9 +144,41 @@ class PokemonListAppBar extends StatelessWidget {
                   child: SizedBox(
                       height: 40,
                       width: Get.width / 2 - 13 - 5,
-                      child: TypeBadge(
-                        fontSize: 17,
-                        type: selectedType,
+                      child: AbilityBadge(
+                        fontSize: 14,
+                        text: selectedAbility,
+                        isDropDown: true,
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return BottomSheetBody(
+                                  title: 'Selecione a habilidade',
+                                  child: Expanded(
+                                    child: ListView.builder(
+                                      itemCount: abilityList.length,
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 13),
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                          height: 50,
+                                          margin:
+                                              const EdgeInsets.only(bottom: 10),
+                                          child: AbilityBadge(
+                                            text: abilityList[index],
+                                            onTap: () {
+                                              Get.back();
+                                              onSelectAbility
+                                                  ?.call(abilityList[index]);
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
+                              });
+                        },
                       )),
                 ),
               ],
