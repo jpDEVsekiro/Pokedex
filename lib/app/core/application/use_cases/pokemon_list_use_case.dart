@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokedex/app/core/application/enums/pokemon_type_enum.dart';
 import 'package:pokedex/app/core/application/models/pokemon_preview_model.dart';
 import 'package:pokedex/app/core/domain/http_adapters/http_response.dart';
 import 'package:pokedex/app/core/domain/http_adapters/i_http_client_adapter.dart';
@@ -17,6 +18,18 @@ class PokemonListUseCase implements IPokemonListUseCase {
     List<PokemonPreviewModel> pokemonList = [];
     for (var pokemon in httpResponse.data['results']) {
       pokemonList.add(PokemonPreviewModel.fromJson(pokemon));
+    }
+    return pokemonList;
+  }
+
+  @override
+  Future<List<PokemonPreviewModel>> getPokemonListByType(
+      PokemonTypeEnum type) async {
+    HttpResponse httpResponse =
+        await _httpClientAdapter.get('${Endpoints.type}/${type.name}');
+    List<PokemonPreviewModel> pokemonList = [];
+    for (var pokemon in httpResponse.data['pokemon']) {
+      pokemonList.add(PokemonPreviewModel.fromJson(pokemon['pokemon']));
     }
     return pokemonList;
   }

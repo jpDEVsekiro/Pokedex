@@ -1,6 +1,7 @@
 abstract class Endpoints {
   static const pokemon = 'pokemon';
   static const pokemonSpecies = 'pokemon-species';
+  static const type = 'type';
 }
 
 abstract class API {
