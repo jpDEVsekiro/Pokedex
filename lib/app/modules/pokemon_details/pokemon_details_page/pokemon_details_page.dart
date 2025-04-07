@@ -121,7 +121,7 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 15,
               ),
               SizedBox(
                 height: 40,
@@ -141,7 +141,19 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: TextPokemon(
+                    text: controller.pokemonModel.value?.flavorTextModel
+                            ?.flavorTextFormatted ??
+                        '',
+                    maxLines: 10,
+                    fontSize: 18),
+              ),
+              SizedBox(
+                height: 15,
               ),
               Row(
                 children: [
