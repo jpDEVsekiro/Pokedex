@@ -31,7 +31,6 @@ class DioAdapter implements IHttpClientAdapter {
     Map<String, dynamic>? headers,
   }) async {
     try {
-      await repository.init();
       dynamic cache = await repository.getById(path);
       if (cache != null) {
         return HttpResponse(
