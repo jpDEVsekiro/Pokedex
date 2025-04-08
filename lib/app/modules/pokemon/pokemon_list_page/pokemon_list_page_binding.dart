@@ -8,8 +8,8 @@ import 'package:pokedex/app/modules/pokemon/pokemon_list_page/pokemon_list_page_
 class PokemonListPageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<IHttpClientAdapter>(DioAdapter());
     Get.put<IRepository>(HiveRepository());
+    Get.put<IHttpClientAdapter>(DioAdapter());
     Get.lazyPut<PokemonListPageController>(() => PokemonListPageController());
   }
 }

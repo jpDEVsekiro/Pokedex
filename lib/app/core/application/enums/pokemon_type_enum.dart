@@ -30,7 +30,7 @@ enum PokemonTypeEnum {
   final String? iconPath;
   const PokemonTypeEnum(this.color, this.iconPath, this.typeName);
 
-  static PokemonTypeEnum fromJson(Map<String, dynamic> json) {
+  static PokemonTypeEnum fromJson(Map json) {
     return PokemonTypeEnum.values.firstWhere(
       (type) => type.name == json['type']['name'],
       orElse: () => PokemonTypeEnum.unknown,

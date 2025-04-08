@@ -34,6 +34,9 @@ class HiveRepository implements IRepository {
 
   @override
   Future<void> init() async {
+    if (box != null) {
+      return;
+    }
     await Hive.initFlutter();
     box = await Hive.openBox('cache');
   }
