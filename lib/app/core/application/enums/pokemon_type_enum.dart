@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:pokedex/app/core/application/theme/palettes.dart';
 
 enum PokemonTypeEnum {
@@ -24,7 +23,7 @@ enum PokemonTypeEnum {
   fairy(Palettes.fairyColor, 'assets/icons/fairy_icon.svg', 'Fada'),
   stellar(Palettes.stellarColor, 'assets/icons/fire_icon.svg', 'Fogo'),
   unknown(Palettes.unknownColor, null, 'Desconhecido'),
-  allTypes(Palettes.pokemonCardColor, null, 'Todos os Tipos');
+  allTypes(Colors.white, null, 'Todos os Tipos');
 
   final Color color;
   final String typeName;

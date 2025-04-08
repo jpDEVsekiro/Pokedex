@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/app/core/application/enums/pokemon_type_enum.dart';
+import 'package:pokedex/app/core/application/theme/palettes.dart';
 import 'package:pokedex/app/modules/widgets/text_pokemon.dart';
 
 class TypeBadge extends StatelessWidget {
@@ -28,6 +29,12 @@ class TypeBadge extends StatelessWidget {
         decoration: BoxDecoration(
           color: type.color,
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: type == PokemonTypeEnum.allTypes
+                ? Palettes.pokemonCardColor
+                : type.color,
+            width: 1,
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -56,15 +63,19 @@ class TypeBadge extends StatelessWidget {
                 child: TextPokemon(
                   text: type.typeName,
                   fontSize: fontSize,
-                  color: Colors.white,
+                  color: type == PokemonTypeEnum.allTypes
+                      ? Palettes.pokemonCardColor
+                      : Colors.white,
                 ),
               ),
             ),
             if (center) Spacer(),
             if (isDropDown)
-              const Icon(
+              Icon(
                 Icons.arrow_drop_down,
-                color: Colors.white,
+                color: type == PokemonTypeEnum.allTypes
+                    ? Palettes.pokemonCardColor
+                    : Colors.white,
                 size: 20,
               ),
           ],

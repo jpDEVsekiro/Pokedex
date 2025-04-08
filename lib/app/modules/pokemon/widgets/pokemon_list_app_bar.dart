@@ -30,163 +30,178 @@ class PokemonListAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      toolbarHeight: MediaQuery.of(context).viewPadding.top + 150,
       floating: true,
+      pinned: false,
+      elevation: 0,
+      excludeHeaderSemantics: true,
+      clipBehavior: Clip.hardEdge,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
-      elevation: 300,
-      centerTitle: false,
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: EdgeInsets.zero,
-        centerTitle: false,
-        background: Container(
-          color: Palettes.backgroundColor,
-        ),
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(75.0),
+        child: SizedBox(),
       ),
-      titleSpacing: 0,
-      title: Container(
+      flexibleSpace: Container(
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: Palettes.backgroundColor,
+          color: Colors.transparent,
+          boxShadow: [
+            BoxShadow(
+              color: Palettes.pokemonCardColor.withValues(alpha: 0.22),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         width: MediaQuery.of(context).size.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).viewPadding.top,
+        child: Container(
+          clipBehavior: Clip.hardEdge,
+          padding: const EdgeInsets.only(top: 15, bottom: 10),
+          decoration: BoxDecoration(
+            color: Palettes.backgroundColor,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 13),
-              child: TextField(
-                onChanged: onChanged,
-                controller: searchController,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.search,
-                  ),
-                  fillColor: Colors.white,
-                  prefixIconColor: Palettes.grayTextColor,
-                  hintText: 'Procurar Pokémon',
-                  hintStyle: PokemonTextStyle.textStyle.copyWith(
-                      color: Palettes.grayTextColor,
-                      fontWeight: FontWeight.w400),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide:
-                        BorderSide(color: Palettes.grayTextColor, width: 1.5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        color: Palettes.pokemonCardColor, width: 1.8),
-                  ),
-                  focusColor: Palettes.pokemonCardColor,
-                ),
-                cursorColor: Palettes.pokemonCardColor,
-                style: PokemonTextStyle.textStyle.copyWith(),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).viewPadding.top,
               ),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 13, top: 10),
-                  child: SizedBox(
-                      height: 40,
-                      width: Get.width / 2 - 13 - 5,
-                      child: TypeBadge(
-                        fontSize: 14,
-                        isDropDown: true,
-                        widthText: Get.width / 2 -
-                            (selectedType == PokemonTypeEnum.allTypes
-                                ? 76
-                                : 105),
-                        type: selectedType,
-                        center: selectedType == PokemonTypeEnum.allTypes
-                            ? true
-                            : false,
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return BottomSheetBody(
-                                  title: 'Selecione o tipo',
-                                  child: Expanded(
-                                    child: ListView.builder(
-                                      itemCount:
-                                          PokemonTypeEnum.validTypes.length,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 13),
-                                      itemBuilder: (context, index) {
-                                        final type =
-                                            PokemonTypeEnum.validTypes[index];
-                                        return Container(
-                                          height: 50,
-                                          margin:
-                                              const EdgeInsets.only(bottom: 10),
-                                          child: TypeBadge(
-                                            type: type,
-                                            center: true,
-                                            onTap: () {
-                                              Get.back();
-                                              onSelectType?.call(type);
-                                            },
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                );
-                              });
-                        },
-                      )),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 13),
+                child: TextField(
+                  onChanged: onChanged,
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search,
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    prefixIconColor: Palettes.grayTextColor,
+                    hintText: 'Procurar Pokémon',
+                    hintStyle: PokemonTextStyle.textStyle.copyWith(
+                        color: Palettes.grayTextColor,
+                        fontWeight: FontWeight.w400),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          color: Palettes.pokemonCardColor, width: 1),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          color: Palettes.pokemonCardColor, width: 1.8),
+                    ),
+                    focusColor: Palettes.pokemonCardColor,
+                  ),
+                  cursorColor: Palettes.pokemonCardColor,
+                  style: PokemonTextStyle.textStyle.copyWith(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10, right: 13),
-                  child: SizedBox(
-                      height: 40,
-                      width: Get.width / 2 - 13 - 5,
-                      child: AbilityBadge(
-                        fontSize: 14,
-                        text: selectedAbility,
-                        isDropDown: true,
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return BottomSheetBody(
-                                  title: 'Selecione a habilidade',
-                                  child: Expanded(
-                                    child: ListView.builder(
-                                      itemCount: abilityList.length,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 13),
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          height: 50,
-                                          margin:
-                                              const EdgeInsets.only(bottom: 10),
-                                          child: AbilityBadge(
-                                            text: abilityList[index],
-                                            onTap: () {
-                                              Get.back();
-                                              onSelectAbility
-                                                  ?.call(abilityList[index]);
-                                            },
-                                          ),
-                                        );
-                                      },
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 13, top: 10),
+                    child: SizedBox(
+                        height: 40,
+                        width: Get.width / 2 - 13 - 5,
+                        child: TypeBadge(
+                          fontSize: 14,
+                          isDropDown: true,
+                          widthText: Get.width / 2 -
+                              (selectedType == PokemonTypeEnum.allTypes
+                                  ? 70
+                                  : 107),
+                          type: selectedType,
+                          center: selectedType == PokemonTypeEnum.allTypes
+                              ? true
+                              : false,
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return BottomSheetBody(
+                                    title: 'Selecione o tipo',
+                                    child: Expanded(
+                                      child: ListView.builder(
+                                        itemCount:
+                                            PokemonTypeEnum.validTypes.length,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 13),
+                                        itemBuilder: (context, index) {
+                                          final type =
+                                              PokemonTypeEnum.validTypes[index];
+                                          return Container(
+                                            height: 50,
+                                            margin: const EdgeInsets.only(
+                                                bottom: 10),
+                                            child: TypeBadge(
+                                              type: type,
+                                              center: true,
+                                              onTap: () {
+                                                Get.back();
+                                                onSelectType?.call(type);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                );
-                              });
-                        },
-                      )),
-                ),
-              ],
-            ),
-            Divider(
-              color: Palettes.pokemonCardColor,
-            )
-          ],
+                                  );
+                                });
+                          },
+                        )),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 10, top: 10, right: 13),
+                    child: SizedBox(
+                        height: 40,
+                        width: Get.width / 2 - 13 - 5,
+                        child: AbilityBadge(
+                          fontSize: 14,
+                          text: selectedAbility,
+                          isDropDown: true,
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return BottomSheetBody(
+                                    title: 'Selecione a habilidade',
+                                    child: Expanded(
+                                      child: ListView.builder(
+                                        itemCount: abilityList.length,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 13),
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            height: 50,
+                                            margin: const EdgeInsets.only(
+                                                bottom: 10),
+                                            child: AbilityBadge(
+                                              text: abilityList[index],
+                                              onTap: () {
+                                                Get.back();
+                                                onSelectAbility
+                                                    ?.call(abilityList[index]);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                });
+                          },
+                        )),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

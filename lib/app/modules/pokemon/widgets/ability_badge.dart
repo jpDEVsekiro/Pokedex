@@ -22,7 +22,8 @@ class AbilityBadge extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Palettes.pokemonCardColor),
+            border: Border.all(color: Palettes.pokemonCardColor, width: 1),
+            color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
@@ -30,17 +31,22 @@ class AbilityBadge extends StatelessWidget {
               Spacer(),
               Padding(
                 padding: EdgeInsets.only(left: isDropDown ? 20 : 0),
-                child: TextPokemon(
-                  text: text,
-                  fontSize: fontSize,
-                  color: Colors.white,
+                child: SizedBox(
+                  width: isDropDown ? 90 : null,
+                  child: Center(
+                    child: TextPokemon(
+                      text: text,
+                      fontSize: fontSize,
+                      color: Palettes.pokemonCardColor,
+                    ),
+                  ),
                 ),
               ),
               const Spacer(),
               if (isDropDown)
                 const Icon(
                   Icons.arrow_drop_down,
-                  color: Colors.white,
+                  color: Palettes.pokemonCardColor,
                   size: 20,
                 ),
             ],
