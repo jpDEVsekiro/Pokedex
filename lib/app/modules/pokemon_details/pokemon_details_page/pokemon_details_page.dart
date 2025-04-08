@@ -133,6 +133,10 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                     return Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: TypeBadge(
+                        onTap: () => controller.onTapType(
+                          controller.pokemonModel.value?.types[index] ??
+                              PokemonTypeEnum.unknown,
+                        ),
                         type: controller.pokemonModel.value?.types[index] ??
                             PokemonTypeEnum.unknown,
                       ),
@@ -187,6 +191,10 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: CharacteristicBox.svg(
+                      onTapBox: () => controller.onTapAbility(
+                        controller.pokemonModel.value?.abilities.firstOrNull ??
+                            '',
+                      ),
                       boxTitle: 'Habilidade',
                       boxValue: controller
                               .pokemonModel.value?.abilities.firstOrNull ??
@@ -198,6 +206,10 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: CharacteristicBox.svg(
+                      onTapBox: () => controller.onTapAbility(
+                        controller.pokemonModel.value?.abilities.lastOrNull ??
+                            '',
+                      ),
                       boxTitle: 'Habilidade',
                       boxValue:
                           controller.pokemonModel.value?.abilities.lastOrNull ??

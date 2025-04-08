@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokedex/app/core/application/enums/pokemon_type_enum.dart';
 import 'package:pokedex/app/core/application/models/pokemon_model.dart';
 import 'package:pokedex/app/core/application/models/pokemon_preview_model.dart';
 import 'package:pokedex/app/core/application/use_cases/pokemon_details_use_case.dart';
@@ -33,6 +34,14 @@ class PokemonDetailsPageController extends GetxController {
       pokemonModel.value!.flavorTextModel = flavorTextModel;
       pokemonModel.refresh();
     }
+  }
+
+  void onTapType(PokemonTypeEnum type) {
+    Get.back(result: type);
+  }
+
+  void onTapAbility(String ability) {
+    Get.back(result: ability);
   }
 
   void goBack() {

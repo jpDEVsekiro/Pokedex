@@ -35,8 +35,13 @@ class PokemonListPageController extends GetxController {
     onChangedText(null);
   }
 
-  void onTapPokemonCard(PokemonPreviewModel pokemon) {
-    Get.toNamed('/pokemon_details', arguments: pokemon);
+  void onTapPokemonCard(PokemonPreviewModel pokemon) async {
+    dynamic result = await Get.toNamed('/pokemon_details', arguments: pokemon);
+    if (result is PokemonTypeEnum) {
+      onSelectType(result);
+    } else if (result is String) {
+      onSelectAbility(result);
+    }
   }
 
   void onChangedText(String? value) {

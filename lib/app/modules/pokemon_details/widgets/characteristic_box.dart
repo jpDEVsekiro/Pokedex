@@ -9,7 +9,8 @@ class CharacteristicBox extends StatelessWidget {
       required this.boxTitle,
       required this.boxValue,
       required IconData this.boxIcon,
-      this.boxWidth = 150})
+      this.boxWidth = 150,
+      this.onTapBox})
       : boxSvgIcon = null;
 
   const CharacteristicBox.svg(
@@ -17,13 +18,15 @@ class CharacteristicBox extends StatelessWidget {
       required this.boxTitle,
       required String this.boxSvgIcon,
       required this.boxValue,
-      this.boxWidth = 150})
+      this.boxWidth = 150,
+      this.onTapBox})
       : boxIcon = null;
   final String boxTitle;
   final String boxValue;
   final IconData? boxIcon;
   final double boxWidth;
   final String? boxSvgIcon;
+  final void Function()? onTapBox;
 
   @override
   Widget build(BuildContext context) {
@@ -57,18 +60,21 @@ class CharacteristicBox extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 5),
-          Container(
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Palettes.grayTextColor,
-                width: 1,
+          InkWell(
+            onTap: onTapBox,
+            child: Container(
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Palettes.grayTextColor,
+                  width: 1,
+                ),
               ),
-            ),
-            child: Center(
-              child: TextPokemon(
-                  text: boxValue, fontSize: 17, fontWeight: FontWeight.bold),
+              child: Center(
+                child: TextPokemon(
+                    text: boxValue, fontSize: 17, fontWeight: FontWeight.bold),
+              ),
             ),
           )
         ],
