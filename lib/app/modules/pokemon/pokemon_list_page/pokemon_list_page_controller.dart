@@ -36,6 +36,9 @@ class PokemonListPageController extends GetxController {
   }
 
   void onTapPokemonCard(PokemonPreviewModel pokemon) async {
+    if (Get.context != null) {
+      FocusScope.of(Get.context!).unfocus();
+    }
     dynamic result = await Get.toNamed('/pokemon_details', arguments: pokemon);
     if (result is PokemonTypeEnum) {
       onSelectType(result);
@@ -53,12 +56,18 @@ class PokemonListPageController extends GetxController {
   }
 
   void onSelectType(PokemonTypeEnum type) {
+    if (Get.context != null) {
+      FocusScope.of(Get.context!).unfocus();
+    }
     selectedAbility.value = 'Habilidades';
     selectedType.value = type;
     getPokemonList();
   }
 
   void onSelectAbility(String ability) {
+    if (Get.context != null) {
+      FocusScope.of(Get.context!).unfocus();
+    }
     selectedType.value = PokemonTypeEnum.allTypes;
     selectedAbility.value = ability;
     getPokemonList();

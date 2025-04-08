@@ -120,6 +120,8 @@ class PokemonListAppBar extends StatelessWidget {
                               ? true
                               : false,
                           onTap: () {
+                            FocusScope.of(context).unfocus();
+
                             showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -166,6 +168,8 @@ class PokemonListAppBar extends StatelessWidget {
                           text: selectedAbility,
                           isDropDown: true,
                           onTap: () {
+                            FocusScope.of(context).unfocus();
+
                             showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
