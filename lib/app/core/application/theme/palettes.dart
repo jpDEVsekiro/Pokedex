@@ -24,4 +24,8 @@ abstract class Palettes {
   static const unknownColor = Colors.black;
   static const backButtonColor = Colors.white;
   static const grayTextColor = Color(0xAF000000);
+  static const lightGrayTextColor = Color(0xFF999999);
+  static const backgroundColor = Color(0xFFFAF9F7);
+  static const dragColor = Color(0xFFE6E6E6);
+  static const pokemonCardColor = Colors.black;
 }

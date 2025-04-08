@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/app/core/application/models/pokemon_preview_model.dart';
+import 'package:pokedex/app/core/application/theme/palettes.dart';
 import 'package:pokedex/app/modules/widgets/text_pokemon.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -12,7 +13,7 @@ class PokemonCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: Colors.black,
+        color: Palettes.pokemonCardColor,
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -42,7 +43,7 @@ class PokemonCard extends StatelessWidget {
                           Container(
                             width: 10,
                             height: 23,
-                            color: Colors.black,
+                            color: Palettes.pokemonCardColor,
                             child: Container(
                               width: 10,
                               height: 23,
@@ -55,7 +56,7 @@ class PokemonCard extends StatelessWidget {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: Palettes.pokemonCardColor,
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(6)),
                             ),
@@ -73,7 +74,7 @@ class PokemonCard extends StatelessWidget {
                       Container(
                         width: 10,
                         height: 23,
-                        color: Colors.black,
+                        color: Palettes.pokemonCardColor,
                         child: Container(
                           width: 10,
                           height: 23,

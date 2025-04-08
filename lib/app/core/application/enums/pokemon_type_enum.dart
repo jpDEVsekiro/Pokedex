@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:pokedex/app/core/application/theme/palettes.dart';
 
 enum PokemonTypeEnum {
@@ -23,17 +22,42 @@ enum PokemonTypeEnum {
   dark(Palettes.darkColor, 'assets/icons/dark_icon.svg', 'Sombrio'),
   fairy(Palettes.fairyColor, 'assets/icons/fairy_icon.svg', 'Fada'),
   stellar(Palettes.stellarColor, 'assets/icons/fire_icon.svg', 'Fogo'),
-  unknown(Palettes.unknownColor, null, 'Desconhecido');
+  unknown(Palettes.unknownColor, null, 'Desconhecido'),
+  allTypes(Colors.white, null, 'Todos os Tipos');
 
   final Color color;
   final String typeName;
   final String? iconPath;
   const PokemonTypeEnum(this.color, this.iconPath, this.typeName);
 
-  static PokemonTypeEnum fromJson(Map<String, dynamic> json) {
+  static PokemonTypeEnum fromJson(Map json) {
     return PokemonTypeEnum.values.firstWhere(
       (type) => type.name == json['type']['name'],
       orElse: () => PokemonTypeEnum.unknown,
     );
+  }
+
+  static List<PokemonTypeEnum> get validTypes {
+    return [
+      allTypes,
+      bug,
+      dark,
+      dragon,
+      electric,
+      fairy,
+      fighting,
+      fire,
+      flying,
+      ghost,
+      grass,
+      ground,
+      ice,
+      normal,
+      poison,
+      psychic,
+      rock,
+      steel,
+      water
+    ];
   }
 }

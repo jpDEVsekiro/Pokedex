@@ -15,7 +15,7 @@ class PokemonPreviewModel {
     return '${'0' * (3 - idString.length)}$idString';
   }
 
-  factory PokemonPreviewModel.fromJson(Map<String, dynamic> map) {
+  factory PokemonPreviewModel.fromJson(Map map) {
     int id = int.parse(map['url'].split('/').reversed.elementAt(1));
     return PokemonPreviewModel(
       name: map['name'],

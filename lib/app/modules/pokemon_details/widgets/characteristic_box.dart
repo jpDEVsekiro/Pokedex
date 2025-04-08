@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/app/core/application/theme/palettes.dart';
 import 'package:pokedex/app/modules/widgets/text_pokemon.dart';
 
@@ -7,12 +8,25 @@ class CharacteristicBox extends StatelessWidget {
       {super.key,
       required this.boxTitle,
       required this.boxValue,
-      required this.boxIcon,
-      this.boxWidth = 150});
+      required IconData this.boxIcon,
+      this.boxWidth = 150,
+      this.onTapBox})
+      : boxSvgIcon = null;
+
+  const CharacteristicBox.svg(
+      {super.key,
+      required this.boxTitle,
+      required String this.boxSvgIcon,
+      required this.boxValue,
+      this.boxWidth = 150,
+      this.onTapBox})
+      : boxIcon = null;
   final String boxTitle;
   final String boxValue;
-  final IconData boxIcon;
+  final IconData? boxIcon;
   final double boxWidth;
+  final String? boxSvgIcon;
+  final void Function()? onTapBox;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +37,20 @@ class CharacteristicBox extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                boxIcon,
-                size: 16,
-                color: Palettes.grayTextColor,
-              ),
+              if (boxSvgIcon != null)
+                SvgPicture.asset(
+                  boxSvgIcon!,
+                  colorFilter:
+                      ColorFilter.mode(Palettes.grayTextColor, BlendMode.srcIn),
+                  height: 16,
+                  width: 16,
+                )
+              else
+                Icon(
+                  boxIcon,
+                  size: 16,
+                  color: Palettes.grayTextColor,
+                ),
               const SizedBox(width: 4),
               TextPokemon(
                 text: boxTitle,
@@ -37,18 +60,21 @@ class CharacteristicBox extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 5),
-          Container(
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Palettes.grayTextColor,
-                width: 1,
+          InkWell(
+            onTap: onTapBox,
+            child: Container(
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Palettes.grayTextColor,
+                  width: 1,
+                ),
               ),
-            ),
-            child: Center(
-              child: TextPokemon(
-                  text: boxValue, fontSize: 17, fontWeight: FontWeight.bold),
+              child: Center(
+                child: TextPokemon(
+                    text: boxValue, fontSize: 17, fontWeight: FontWeight.bold),
+              ),
             ),
           )
         ],

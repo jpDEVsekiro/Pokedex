@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokedex/app/core/application/theme/palettes.dart';
 import 'package:pokedex/app/modules/pokemon/pokemon_list_page/pokemon_list_page_controller.dart';
 import 'package:pokedex/app/modules/pokemon/widgets/pokemon_card.dart';
+import 'package:pokedex/app/modules/pokemon/widgets/pokemon_list_app_bar.dart';
 
 class PokemonListPage extends GetView<PokemonListPageController> {
   const PokemonListPage({super.key});
@@ -9,16 +11,25 @@ class PokemonListPage extends GetView<PokemonListPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Column(
-        children: [
-          Expanded(
-            child: Obx(
-              () => GridView.builder(
-                itemCount: controller.pokemonPreviewModelList.length,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+      backgroundColor: Palettes.backgroundColor,
+      body: CustomScrollView(
+        slivers: [
+          Obx(() => PokemonListAppBar(
+                onChanged: controller.onChangedText,
+                onSelectType: controller.onSelectType,
+                selectedType: controller.selectedType.value,
+                searchController: controller.searchController,
+                selectedAbility: controller.selectedAbility.value,
+                abilityList: controller.pokemonAbilities,
+                onSelectAbility: controller.onSelectAbility,
+              )),
+          Obx(
+            () => SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              sliver: SliverGrid.builder(
+                itemCount: controller.filterPokemonList.length,
                 itemBuilder: (context, index) {
-                  final pokemon = controller.pokemonPreviewModelList[index];
+                  final pokemon = controller.filterPokemonList[index];
                   return PokemonCard(
                     pokemonPreviewModel: pokemon,
                     onTap: () => controller.onTapPokemonCard(pokemon),
@@ -26,9 +37,9 @@ class PokemonListPage extends GetView<PokemonListPageController> {
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 10,
+                    crossAxisSpacing: 5,
                     mainAxisExtent: 170.0,
-                    mainAxisSpacing: 10),
+                    mainAxisSpacing: 5),
               ),
             ),
           ),
