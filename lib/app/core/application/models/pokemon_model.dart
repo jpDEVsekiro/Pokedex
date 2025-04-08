@@ -33,7 +33,7 @@ class PokemonModel {
     return '${(height / 10).toStringAsFixed(1)} M'.replaceAll('.', ',');
   }
 
-  factory PokemonModel.fromJson(Map<String, dynamic> json) {
+  factory PokemonModel.fromJson(Map json) {
     return PokemonModel(
       pokemonPreviewModel: PokemonPreviewModel(
         name: json['name'],

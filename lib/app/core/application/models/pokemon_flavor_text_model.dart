@@ -11,7 +11,7 @@ class PokemonFlavorTextModel {
     return flavorText.replaceAll('\n', ' ').replaceAll('\f', ' ').trim();
   }
 
-  factory PokemonFlavorTextModel.fromJson(Map<String, dynamic> json) {
+  factory PokemonFlavorTextModel.fromJson(Map json) {
     return PokemonFlavorTextModel(
       evolutionChainUrl: json['evolution_chain']['url'],
       flavorText: (json['flavor_text_entries'] as List).first['flavor_text'],
