@@ -31,7 +31,7 @@ main() {
       expect(find.byType(PokemonDetailsPage), findsOneWidget);
       await Future.delayed(const Duration(milliseconds: 2000));
     });
-    testWidgets('Select Type in fiter', (WidgetTester tester) async {
+    testWidgets('Select Type in filter', (WidgetTester tester) async {
       await openPokemonListingPageTest(tester);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(Key('select_type_badge_allTypes')));
