@@ -63,6 +63,7 @@ class CharacteristicBox extends StatelessWidget {
           InkWell(
             onTap: onTapBox,
             child: Container(
+              key: Key('ability_box_$boxValue'),
               height: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),

@@ -6,9 +6,12 @@ import 'package:pokedex/main.dart' as app;
 
 import 'app/modules/pokemon/pokemon_list_page/pokemon_list_page_integration_test.dart'
     as pokemon_list_page_integration_test;
+import 'app/modules/pokemon_details/pokemon_details_page/pokemon_details_page_integration_test.dart'
+    as pokemon_details_page_integration_test;
 
 void main() {
   pokemon_list_page_integration_test.main();
+  pokemon_details_page_integration_test.main();
 }
 
 Future<void> openPokemonListingPageTest(WidgetTester tester) async {
@@ -27,10 +30,17 @@ Future<void> openPokemonListingPageTest(WidgetTester tester) async {
 }
 
 Future<void> openPokemonDetailsPageTest(WidgetTester tester) async {
-  openPokemonDetailsPageTest(tester);
+  await openPokemonListingPageTest(tester);
   await tester.pumpAndSettle();
   await tester.tap(find.byKey(Key('pokemon_6')));
   await tester.pumpAndSettle();
   expect(find.byType(PokemonDetailsPage), findsOneWidget);
   await Future.delayed(Duration(seconds: 2));
+  expect(find.byKey(Key('background_type_fire')), findsOneWidget);
+  expect(find.byKey(Key('pokemon_gif_6')), findsOneWidget);
+  expect(find.byKey(Key('type_badge_fire')), findsOneWidget);
+  expect(find.byKey(Key('description')), findsOneWidget);
+  expect(find.byKey(Key('weight')), findsOneWidget);
+  expect(find.byKey(Key('height')), findsOneWidget);
+  expect(find.text('Charizard'), findsOneWidget);
 }
