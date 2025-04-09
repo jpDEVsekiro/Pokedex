@@ -9,14 +9,22 @@
 Este aplicativo tem como objetivo ajudar os usuários a encontrarem e visualizarem detalhes sobre seus Pokémon favoritos. Através dele, é possível acessar informações completas, como tipo, habilidades, e outras características importantes de cada Pokémon. 
 <div >&nbsp;</div>
 
+
+https://github.com/user-attachments/assets/7dc1ae07-2a34-4db0-b715-c8aae7ee00f0
+
+
 # 💉 Gerenciador de Estado e Injetor de Dependências
 Pokedex utiliza [GetX](https://pub.dev/packages/get) como gerenciador de estado, sendo uma solução leve e rápida para Flutter, que permite criar um projeto organizado e com código limpo.
+![Screen_Recording_20250409_121342](https://github.com/user-attachments/assets/c7d88fca-19d8-4e4f-871d-cdca2428db66)
 
 # :rocket: Requisições Http
 O app ultiliza o package [Dio](https://pub.dev/packages/dio) para realizar todas as requisições de forma simples e eficiente. O Dio oferece diversas funcionalidades de alto nível, como interceptadores, formatação automática de JSON, cancelamento de requisições e suporte completo a requisições assíncronas, tornando o processo de comunicação com a API mais ágil e robusto.
+![Screen_Recording_20250409_122016](https://github.com/user-attachments/assets/e178acdd-0f72-4532-a994-7e1d75803a8c)
 
 # :file_folder: Cache
 O app ultiliza o package  [Hive](https://pub.dev/packages/hive) como banco de dados para armanezar dados do cache, Hive é um banco de dados não relacional leve e extremamente rápido, escrito inteiramente em Dart. Ele é ideal para armazenar dados localmente de forma eficiente, oferecendo excelente desempenho mesmo em dispositivos com recursos limitados.
+![image](https://github.com/user-attachments/assets/ebc0c353-a5f4-4e92-a337-53ba3dc4f58c)
+
 
 # Como Rodar o Projeto
 
