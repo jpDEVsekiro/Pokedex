@@ -82,6 +82,12 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                         height: 290,
                         alignment: Alignment.bottomCenter,
                         fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          return SizedBox(
+                            width: Get.width,
+                            height: 290,
+                          );
+                        },
                       ),
                     ),
                     Positioned(

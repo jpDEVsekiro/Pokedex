@@ -31,7 +31,14 @@ class PokemonCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Stack(alignment: Alignment.bottomLeft, children: [
-                  Center(child: Image.network(pokemonPreviewModel.imageUrl)),
+                  Center(
+                      child: Image.network(
+                    pokemonPreviewModel.imageUrl,
+                    errorBuilder: (BuildContext context, Object obj,
+                        StackTrace? stackTrace) {
+                      return const Icon(Icons.error);
+                    },
+                  )),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,

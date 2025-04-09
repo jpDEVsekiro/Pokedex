@@ -78,4 +78,12 @@ class PokemonListPageController extends GetxController {
     pokemonAbilities.insert(0, 'Habilidades');
     selectedAbility.value = pokemonAbilities[0];
   }
+
+  void onErrorPokemonCard(PokemonPreviewModel pokemon) async {
+    if (Get.context != null) {
+      FocusScope.of(Get.context!).unfocus();
+    }
+    pokemonList.remove(pokemon);
+    filterPokemonList.remove(pokemon);
+  }
 }
