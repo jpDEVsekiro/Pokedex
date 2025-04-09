@@ -24,7 +24,7 @@ O app ultiliza o package  [Hive](https://pub.dev/packages/hive) como banco de da
 
 1 - Clonar o repositório.
 ```shell
-git clone https://github.com/jpDEVsekiro/teste-guia-de-moteis.git
+git clone https://github.com/jpDEVsekiro/im-mottu-mobile.git
 ```
 
 2 - Abrir o projeto no Android Studio.
