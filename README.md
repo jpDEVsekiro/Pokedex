@@ -1,97 +1,54 @@
-# 🧪 I'm Mottu Mobile — Teste prático Flutter com PokeAPI
 
-Este teste está dividido em três níveis de dificuldade. Você pode desenvolver seu App atendendo apenas a um nível ou a todos, conforme desejar demonstrar suas habilidades.
+![image](https://github.com/user-attachments/assets/775b5c1f-8298-4736-942b-4e6b160760d8)
 
----
+<h1 align="center">
+ Teste Técnico Mottu
+</h1>
 
-## ✅ Etapas Iniciais (obrigatórias para qualquer nível)
+<div><a href="https://git.io/typing-svg"><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=&size=18&duration=3000&pause=1000&color=F7F7F7&width=400&lines=Ol%C3%A1!+Bem+vindo+ao+meu+projeto+%F0%9F%91%8B" alt="Typing SVG" /></a></div>
+Este aplicativo tem como objetivo ajudar os usuários a encontrarem e visualizarem detalhes sobre seus Pokémon favoritos. Através dele, é possível acessar informações completas, como tipo, habilidades, e outras características importantes de cada Pokémon. 
+<div >&nbsp;</div>
 
-1. Faça um **fork deste repositório** para o seu GitHub como privado.
-2. Adicione os usuários abaixo como colaboradores:
-   - `@brunosmm`
-   - `@BetoMottu`
-   - `@moreirawebmaster`
-   - `@jeanchrocha`
-3. Crie um novo projeto Flutter com o package:
-4. Utilize a [PokeAPI](https://pokeapi.co/) como fonte de dados.
-5. Crie um arquivo `README.md` com:
-- Quais funcionalidades foram implementadas
-- Como rodar o projeto
-- Arquitetura utilizada (se houver)
-6. O app deve buildar também para a plataforma **iOS**.
+# 💉 Gerenciador de Estado e Injetor de Dependências
+Pokedex utiliza [GetX](https://pub.dev/packages/get) como gerenciador de estado, sendo uma solução leve e rápida para Flutter, que permite criar um projeto organizado e com código limpo.
 
----
+# :rocket: Requisições Http
+O app ultiliza o package [Dio](https://pub.dev/packages/dio) para realizar todas as requisições de forma simples e eficiente. O Dio oferece diversas funcionalidades de alto nível, como interceptadores, formatação automática de JSON, cancelamento de requisições e suporte completo a requisições assíncronas, tornando o processo de comunicação com a API mais ágil e robusto.
 
-## 📚 Referência da API
+# :file_folder: Cache
+O app ultiliza o package  [Hive](https://pub.dev/packages/hive) como banco de dados para armanezar dados do cache, Hive é um banco de dados não relacional leve e extremamente rápido, escrito inteiramente em Dart. Ele é ideal para armazenar dados localmente de forma eficiente, oferecendo excelente desempenho mesmo em dispositivos com recursos limitados.
 
-A API utilizada neste teste é a [PokeAPI](https://pokeapi.co/). Abaixo, alguns endpoints úteis:
+# Como Rodar o Projeto
 
-| Recurso              | Endpoint base                                 | Exemplo                                      |
-|----------------------|-----------------------------------------------|----------------------------------------------|
-| Lista de pokémons    | `/api/v2/pokemon`                             | https://pokeapi.co/api/v2/pokemon            |
-| Detalhes do pokémon  | `/api/v2/pokemon/{name}`                      | https://pokeapi.co/api/v2/pokemon/pikachu    |
-| Tipos                | `/api/v2/type`                                | https://pokeapi.co/api/v2/type/electric      |
-| Habilidades          | `/api/v2/ability`                             | https://pokeapi.co/api/v2/ability/1          |
+É necessário ter [Flutter](https://flutter.dev/) e [Android Studio](https://developer.android.com/studio?hl=pt-br) instalados e configurados corretamente.
 
-> A documentação completa está disponível em:  
-> 🔗 https://pokeapi.co/docs/v2
+1 - Clonar o repositório.
+```shell
+git clone https://github.com/jpDEVsekiro/teste-guia-de-moteis.git
+```
 
----
+2 - Abrir o projeto no Android Studio.
 
-## 🔸 Nível 1 — `level_1`
+3 - Rodar `flutter pub get` no terminal.
+```shell
+flutter pub get
+```
 
-- Realizar todas as **etapas iniciais**
-- Mostrar uma **listagem de Pokémons** com:
-- Imagem
-- Nome
-- Ao clicar em um card da listagem, exibir a tela de **detalhes** com:
-- Imagem
-- Nome
-- Altura
-- Peso
+4 - Rodar o projeto.
+```shell
+flutter run
+```
 
----
+# Como Rodar os Testes
 
-## 🔸 Nível 2 — `level_2`
+Para rodar os [testes unitários](https://docs.flutter.dev/cookbook/testing/unit/introduction) é necessário rodar o comando `flutter test` no terminal.
+```shell
+flutter test
+```
+<div >&nbsp;</div>
 
-- Tudo do **Nível 1**
-- Armazenar localmente em **cache** as consultas feitas à API
-- Criar um **filtro por nome** para a listagem
-- Na tela de detalhes, exibir também:
-- **Tipos**
-- **Habilidades**
-
----
-
-## 🔸 Nível 3 — `level_3`
-
-- Tudo do **Nível 2**
-- Criar uma **Splash screen customizada**
-- Limpar o **cache** ao fechar o app
-- Implementar **paginação** na listagem
-- Ao clicar em um tipo ou habilidade, exibir a lista de pokémons relacionados
-- Permitir navegação para os detalhes de pokémons relacionados
-- Criar **testes de unidade** para as regras de negócio
-
----
-
-## 💎 Pontos Extras (opcional)
-
-- Utilizar **GetX**
-- Configurar **Firebase Crashlytics**
-- Criar **channel nativo (Kotlin)** para detectar mudanças de conexão e exibir mensagem de status offline no app
-- Utilizar uma arquitetura (MVC, MVVM, MVP, MVU)
-
----
-
-## 💡 Boas práticas
-
-- Faça commits frequentes e descritivos
-- Trabalhe com **branches separadas por nível** (ex: `level_1`, `level_2`, etc)
-- Use Pull Requests (PRs) ao evoluir entre níveis
-- Seja criativo(a), mas evite cópias ou uso de IA — nós vamos perceber 😎
-
----
-
-Boa sorte e divirta-se!  
-🚀 Equipe Mottu
+Para rodar os [testes de integração](https://docs.flutter.dev/testing/integration-tests) é necessário rodar o comando `flutter test integration_test/all_integration_test.dart` no terminal.
+```shell
+flutter test integration_test/all_integration_test.dart
+```
+<div >&nbsp;</div>
