@@ -27,10 +27,13 @@ class PokemonListPage extends GetView<PokemonListPageController> {
             () => SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               sliver: SliverGrid.builder(
+                key: Key('pokemon_list'),
+                addAutomaticKeepAlives: true,
                 itemCount: controller.filterPokemonList.length,
                 itemBuilder: (context, index) {
                   final pokemon = controller.filterPokemonList[index];
                   return PokemonCard(
+                    key: Key('pokemon_${pokemon.id}'),
                     pokemonPreviewModel: pokemon,
                     onTap: () => controller.onTapPokemonCard(pokemon),
                   );

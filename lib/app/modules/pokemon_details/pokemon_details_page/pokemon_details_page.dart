@@ -65,6 +65,8 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                               controller.pokemonModel.value?.types.first
                                       .iconPath ??
                                   '',
+                              key: Key(
+                                  'background_type_${controller.pokemonModel.value?.types.first.name}'),
                               width: Get.width * 0.6,
                               height: Get.width * 0.6,
                               colorFilter: ColorFilter.mode(
@@ -78,10 +80,18 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Image.network(
                         controller.pokemonModel.value!.gifUrl!,
+                        key: Key(
+                            'pokemon_gif_${controller.pokemonModel.value?.pokemonPreviewModel.id}'),
                         width: Get.width,
                         height: 290,
                         alignment: Alignment.bottomCenter,
                         fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          return SizedBox(
+                            width: Get.width,
+                            height: 290,
+                          );
+                        },
                       ),
                     ),
                     Positioned(
@@ -133,6 +143,8 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                     return Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: TypeBadge(
+                        key: Key(
+                            'type_badge_${controller.pokemonModel.value?.types[index].name}'),
                         onTap: () => controller.onTapType(
                           controller.pokemonModel.value?.types[index] ??
                               PokemonTypeEnum.unknown,
@@ -150,6 +162,7 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: TextPokemon(
+                    key: Key('description'),
                     text: controller.pokemonModel.value?.flavorTextModel
                             ?.flavorTextFormatted ??
                         '',
@@ -164,6 +177,7 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: CharacteristicBox.svg(
+                      key: Key('weight'),
                       boxTitle: 'Peso',
                       boxValue:
                           controller.pokemonModel.value?.weightFormatted ?? '',
@@ -174,6 +188,7 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: CharacteristicBox(
+                      key: Key('height'),
                       boxTitle: 'Altura',
                       boxValue:
                           controller.pokemonModel.value?.heightFormatted ?? '',
@@ -191,6 +206,8 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: CharacteristicBox.svg(
+                      key: Key(
+                          'ability_${controller.pokemonModel.value?.abilities.firstOrNull}'),
                       onTapBox: () => controller.onTapAbility(
                         controller.pokemonModel.value?.abilities.firstOrNull ??
                             '',
@@ -206,6 +223,8 @@ class PokemonDetailsPage extends GetView<PokemonDetailsPageController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: CharacteristicBox.svg(
+                      key: Key(
+                          'ability_${controller.pokemonModel.value?.abilities.lastOrNull}'),
                       onTapBox: () => controller.onTapAbility(
                         controller.pokemonModel.value?.abilities.lastOrNull ??
                             '',
