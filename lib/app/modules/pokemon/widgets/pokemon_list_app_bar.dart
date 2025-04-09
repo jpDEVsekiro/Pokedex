@@ -72,6 +72,7 @@ class PokemonListAppBar extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 13),
                 child: TextField(
+                  key: Key('search_field'),
                   onChanged: onChanged,
                   controller: searchController,
                   decoration: InputDecoration(
@@ -109,6 +110,7 @@ class PokemonListAppBar extends StatelessWidget {
                         height: 40,
                         width: Get.width / 2 - 13 - 5,
                         child: TypeBadge(
+                          key: Key('select_type_badge_${selectedType.name}'),
                           fontSize: 14,
                           isDropDown: true,
                           widthText: Get.width / 2 -
@@ -126,6 +128,7 @@ class PokemonListAppBar extends StatelessWidget {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return BottomSheetBody(
+                                    key: Key('select_type_bottom_sheet'),
                                     title: 'Selecione o tipo',
                                     child: Expanded(
                                       child: ListView.builder(
@@ -141,6 +144,8 @@ class PokemonListAppBar extends StatelessWidget {
                                             margin: const EdgeInsets.only(
                                                 bottom: 10),
                                             child: TypeBadge(
+                                              key: Key(
+                                                  'type_badge_${type.name}'),
                                               type: type,
                                               center: true,
                                               onTap: () {
@@ -164,6 +169,7 @@ class PokemonListAppBar extends StatelessWidget {
                         height: 40,
                         width: Get.width / 2 - 13 - 5,
                         child: AbilityBadge(
+                          key: Key('select_ability_badge_$selectedAbility'),
                           fontSize: 14,
                           text: selectedAbility,
                           isDropDown: true,
@@ -174,6 +180,7 @@ class PokemonListAppBar extends StatelessWidget {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return BottomSheetBody(
+                                    key: Key('select_ability_bottom_sheet'),
                                     title: 'Selecione a habilidade',
                                     child: Expanded(
                                       child: ListView.builder(
@@ -186,6 +193,8 @@ class PokemonListAppBar extends StatelessWidget {
                                             margin: const EdgeInsets.only(
                                                 bottom: 10),
                                             child: AbilityBadge(
+                                              key: Key(
+                                                  'ability_badge_${abilityList[index]}'),
                                               text: abilityList[index],
                                               onTap: () {
                                                 Get.back();
