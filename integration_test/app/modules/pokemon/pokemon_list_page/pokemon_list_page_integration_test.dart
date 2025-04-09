@@ -53,7 +53,7 @@ main() {
       expect(find.byKey(Key('pokemon_63')), findsOneWidget);
     });
 
-    testWidgets('Select Ability in fiter', (WidgetTester tester) async {
+    testWidgets('Select Ability in filter', (WidgetTester tester) async {
       await openPokemonListingPageTest(tester);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(Key('select_ability_badge_Habilidades')));
