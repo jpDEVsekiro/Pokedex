@@ -1,69 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pokedex/app/core/application/models/pokemon_model.dart';
-import 'package:pokedex/app/core/application/models/pokemon_preview_model.dart';
 import 'package:pokedex/app/core/application/use_cases/pokemon_details_use_case.dart';
 import 'package:pokedex/app/core/domain/http_adapters/http_response.dart';
 import 'package:pokedex/app/core/domain/http_adapters/i_http_client_adapter.dart';
 import 'package:pokedex/app/core/infrastructure/endpoints/endpoints.dart';
 
 import '../../domain/http_adapters/mock_i_http_client_adapter.dart';
-
-PokemonModel pokemonModel = PokemonModel(
-  baseExperience: 100,
-  abilities: ['overgrow', 'chlorophyll'],
-  weight: 69,
-  height: 7,
-  gifUrl: 'https://example.com/gif',
-  criesUrl: 'https://example.com/cries',
-  types: [],
-  pokemonPreviewModel: PokemonPreviewModel(
-    name: 'Pikachu',
-    id: 1,
-    imageUrl: 'https://example.com/image',
-  ),
-);
-
-Map<String, dynamic> pokemonMap = {
-  'id': 1,
-  'name': 'Pikachu',
-  'base_experience': pokemonModel.baseExperience,
-  'weight': pokemonModel.weight,
-  'height': pokemonModel.height,
-  'sprites': {
-    'front_default': pokemonModel.gifUrl,
-    'other': {
-      'showdown': {
-        'front_default': pokemonModel.gifUrl,
-      }
-    }
-  },
-  'abilities': [
-    {
-      'ability': {'name': pokemonModel.abilities[0]}
-    },
-    {
-      'ability': {'name': pokemonModel.abilities[1]}
-    },
-  ],
-  'types': [],
-};
-
-Map<String, dynamic> pokemonSpeciesMap = {
-  'evolution_chain': {'url': 'https://pokeapi.co/api/v2/pokemon-species/25/'},
-  'flavor_text_entries': [
-    {
-      'flavor_text': 'Flavor text',
-      'language': {'name': 'en'}
-    }
-  ]
-};
+import '../models/mock_pokemon_model.dart';
 
 void main() {
   group('MoTelsListingRepository test', () {
     final mockIHttp = MockIHttpClientAdapter();
     Get.put<IHttpClientAdapter>(mockIHttp);
+    final mockPokemon = MockPokemonModel();
 
     final useCase = PokemonDetailsUseCase();
 
@@ -75,16 +25,16 @@ void main() {
       when(() => mockIHttp.get('${Endpoints.pokemon}/$pokemonId'))
           .thenAnswer((_) async => HttpResponse(
                 statusCode: StatusCodeEnum.ok,
-                data: pokemonMap,
+                data: mockPokemon.pokemonMap,
               ));
 
       final result = await useCase.getPokemon(pokemonId);
       expect(result.pokemonPreviewModel.name,
-          pokemonModel.pokemonPreviewModel.name);
-      expect(
-          result.pokemonPreviewModel.id, pokemonModel.pokemonPreviewModel.id);
-      expect(result.baseExperience, pokemonModel.baseExperience);
-      expect(result.weight, pokemonModel.weight);
+          mockPokemon.pokemonModel.pokemonPreviewModel.name);
+      expect(result.pokemonPreviewModel.id,
+          mockPokemon.pokemonModel.pokemonPreviewModel.id);
+      expect(result.baseExperience, mockPokemon.pokemonModel.baseExperience);
+      expect(result.weight, mockPokemon.pokemonModel.weight);
     });
 
     test(
@@ -110,7 +60,7 @@ void main() {
       when(() => mockIHttp.get('${Endpoints.pokemonSpecies}/$pokemonId'))
           .thenAnswer((_) async => HttpResponse(
                 statusCode: StatusCodeEnum.ok,
-                data: pokemonSpeciesMap,
+                data: mockPokemon.pokemonSpeciesMap,
               ));
 
       final result = await useCase.getFlavorText(pokemonId);

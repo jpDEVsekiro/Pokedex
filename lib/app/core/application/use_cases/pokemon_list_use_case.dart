@@ -10,49 +10,85 @@ class PokemonListUseCase implements IPokemonListUseCase {
   final IHttpClientAdapter _httpClientAdapter = Get.find<IHttpClientAdapter>();
   @override
   Future<List<PokemonPreviewModel>> getPokemonList() async {
-    HttpResponse httpResponse =
-        await _httpClientAdapter.get(Endpoints.pokemon, queryParameters: {
-      'limit': 1000000,
-      'offset': 0,
-    });
-    List<PokemonPreviewModel> pokemonList = [];
-    for (var pokemon in httpResponse.data['results']) {
-      pokemonList.add(PokemonPreviewModel.fromJson(pokemon));
+    try {
+      HttpResponse httpResponse =
+          await _httpClientAdapter.get(Endpoints.pokemon, queryParameters: {
+        'limit': 1000000,
+        'offset': 0,
+      });
+      List<PokemonPreviewModel> pokemonList = [];
+      if (httpResponse.statusCode.isError ||
+          httpResponse.data['results'] == null) {
+        throw Exception('Failed to load pokemon list');
+      }
+      for (var pokemon in httpResponse.data['results']) {
+        pokemonList.add(PokemonPreviewModel.fromJson(pokemon));
+      }
+      return pokemonList;
+    } catch (e) {
+      throw Exception('Failed to load pokemon list');
     }
-    return pokemonList;
   }
 
   @override
   Future<List<PokemonPreviewModel>> getPokemonListByType(
       PokemonTypeEnum type) async {
-    HttpResponse httpResponse =
-        await _httpClientAdapter.get('${Endpoints.type}/${type.name}');
-    List<PokemonPreviewModel> pokemonList = [];
-    for (var pokemon in httpResponse.data['pokemon']) {
-      pokemonList.add(PokemonPreviewModel.fromJson(pokemon['pokemon']));
+    try {
+      HttpResponse httpResponse =
+          await _httpClientAdapter.get('${Endpoints.type}/${type.name}');
+      List<PokemonPreviewModel> pokemonList = [];
+      if (httpResponse.statusCode.isError ||
+          httpResponse.data['pokemon'] == null) {
+        throw Exception('Failed to load pokemon list by type');
+      }
+      for (var pokemon in httpResponse.data['pokemon']) {
+        pokemonList.add(PokemonPreviewModel.fromJson(pokemon['pokemon']));
+      }
+      return pokemonList;
+    } catch (e) {
+      throw Exception('Failed to load pokemon list by type');
     }
-    return pokemonList;
   }
 
   @override
   Future<List<PokemonPreviewModel>> getPokemonListByAbility(
       String ability) async {
-    HttpResponse httpResponse =
-        await _httpClientAdapter.get('${Endpoints.ability}/$ability');
-    List<PokemonPreviewModel> pokemonList = [];
-    for (var pokemon in httpResponse.data['pokemon']) {
-      pokemonList.add(PokemonPreviewModel.fromJson(pokemon['pokemon']));
+    try {
+      HttpResponse httpResponse =
+          await _httpClientAdapter.get('${Endpoints.ability}/$ability');
+      List<PokemonPreviewModel> pokemonList = [];
+      if (httpResponse.statusCode.isError ||
+          httpResponse.data['pokemon'] == null) {
+        throw Exception('Failed to load pokemon list by ability');
+      }
+      for (var pokemon in httpResponse.data['pokemon']) {
+        pokemonList.add(PokemonPreviewModel.fromJson(pokemon['pokemon']));
+      }
+      return pokemonList;
+    } catch (e) {
+      throw Exception('Failed to load pokemon list by ability');
     }
-    return pokemonList;
   }
 
   @override
   Future<List<String>> getPokemonAbilities() async {
-    HttpResponse httpResponse = await _httpClientAdapter.get(Endpoints.ability);
-    List<String> abilityList = [];
-    for (var ability in httpResponse.data['results']) {
-      abilityList.add(ability['name']);
+    try {
+      HttpResponse httpResponse =
+          await _httpClientAdapter.get(Endpoints.ability, queryParameters: {
+        'limit': 1000000,
+        'offset': 0,
+      });
+      List<String> abilityList = [];
+      if (httpResponse.statusCode.isError ||
+          httpResponse.data['results'] == null) {
+        throw Exception('Failed to load pokemon abilities');
+      }
+      for (var ability in httpResponse.data['results']) {
+        abilityList.add(ability['name']);
+      }
+      return abilityList;
+    } catch (e) {
+      throw Exception('Failed to load pokemon abilities');
     }
-    return abilityList;
   }
 }
