@@ -2,7 +2,7 @@
 ![image](https://github.com/user-attachments/assets/775b5c1f-8298-4736-942b-4e6b160760d8)
 
 <h1 align="center">
- Teste Técnico Mottu
+ Pokédex
 </h1>
 
 <div><a href="https://git.io/typing-svg"><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=&size=18&duration=3000&pause=1000&color=F7F7F7&width=400&lines=Ol%C3%A1!+Bem+vindo+ao+meu+projeto+%F0%9F%91%8B" alt="Typing SVG" /></a></div>
