@@ -1,0 +1,1 @@
+C:\projects\pokemon\build\app\intermediates\cxx\Debug\23612ky6\obj\arm64-v8a
