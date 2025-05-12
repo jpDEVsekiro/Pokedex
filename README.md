@@ -46,10 +46,6 @@ Dessa forma, é possível escalar o projeto com mais segurança, facilitar os te
 
 <H4>Componentes:</H4>
 
-<b>enums:</b> Define tipos enumerados usados para representar estados ou opções fixas na aplicação.
-
-<b>models:</b> Contém classes que representam dados manipulados pela aplicação.
-
 <b>theme:</b> Gerencia temas e estilos visuais da aplicação, como cores e fontes.
 
 <b>use_cases:</b> Define operações de alto nível que o sistema pode realizar, encapsulando a lógica de aplicação.
@@ -65,6 +61,11 @@ Dessa forma, é possível escalar o projeto com mais segurança, facilitar os te
 <b>repositories:</b> Interfaces que definem contratos para manipulação e acesso a dados.
 
 <b>use_cases:</b> Casos de uso específicos do domínio, detalhando a lógica de negócios.
+
+<b>enums:</b> Define tipos enumerados usados para representar estados ou opções fixas na aplicação.
+
+<b>models:</b> Contém classes que representam dados manipulados pela aplicação.
+
 
 <H3>Camada de Infraestrutura (lib/app/core/infrastructure)</H3>
 
